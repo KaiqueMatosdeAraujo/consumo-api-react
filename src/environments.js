@@ -1,3 +1,3 @@
-const baseAPI = 'http://localhost:8080'
+const baseAPI = 'http://localhost:3003'
 
 export { baseAPI }

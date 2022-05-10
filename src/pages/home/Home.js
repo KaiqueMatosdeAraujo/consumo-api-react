@@ -5,35 +5,25 @@ import ListaProdutos from '../../components/listaProdutos/ListaProdutos'
 
 function Home() {
 
-    const [ofertas, setOfertas] = useState([])
-    const [maisVendidos, setMaisVendidos] = useState([])
+    const [produtos, setProdutos] = useState([])
 
-    useEffect(() => {
-        axios.get(`${baseAPI}/ofertas`)
-        .then((response)=> {
-            setOfertas(response.data)
-        })
-        .catch((error) => {
-            console.log("Ops! Ocorreu um erro: " + error.message)
-        })
+        useEffect(() => {
+            axios.get('http://localhost:3001/produtos/')
+            .then((response)=> {
+            setProdutos(response.data)
+            })
+            .catch((err)=> {
+            console.error("Ops! ocorreu um erro" + err)
+            })
+            }, [])
+            
 
-        axios.get(`${baseAPI}/maisvendidos`)
-        .then((response)=> {
-            setMaisVendidos(response.data)
-        })
-        .catch((error) => {
-            console.log("Ops! Ocorreu um erro: " + error.message)
-        })
-
-    }, [])
-
-    return (
-        <> 
-            <h1>Home</h1>
-            <ListaProdutos titulo="Ofertas" produtos={ofertas}/>
-            <ListaProdutos titulo="Mais Vendidos" produtos={maisVendidos}/>
-        </>
-    )
+            return (
+                <div>
+                <h1>Home</h1>
+                <ListaProdutos produtos={produtos} />
+                </div>
+                )
 }
 
 export default Home
